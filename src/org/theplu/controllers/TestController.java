@@ -8,17 +8,27 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import beans.TestBean;
+import entities.TestEntity;
+
 @Stateless
 @LocalBean
 @Path("/test")
 public class TestController {
 
+	private TestBean logic;
+	
+	public TestController(){
+		//
+		logic = new TestBean();
+		
+	}
 	
     @POST
     @Produces("text/json")
     @Consumes("application/json")
-	public String getAll(TestInput input){
-		return "Hello "+input.getMessage();
+	public String getAll(TestEntity input){
+		return "Hello "+input.getMessage()+" "+logic.testLogic();
 	}
 	
 }

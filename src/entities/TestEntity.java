@@ -1,16 +1,16 @@
-package org.theplu.controllers;
+package entities;
 
-public class TestInput {
+public class TestEntity {
 
 	private String message;
 
 	
 	
-	public TestInput() {
+	public TestEntity() {
 		super();
 	}
 
-	public TestInput(String message) {
+	public TestEntity(String message) {
 		super();
 		this.message = message;
 	}
