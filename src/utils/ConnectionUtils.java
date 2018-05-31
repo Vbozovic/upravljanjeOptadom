@@ -2,7 +2,11 @@ package utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 
 public class ConnectionUtils {
 
@@ -37,4 +41,30 @@ public class ConnectionUtils {
 		}
 	}
 	
+	public static ResultSet getResult(String query){
+		Connection con = getConnection();
+		Statement stm = null;
+		ResultSet rset= null;
+		
+		try {
+			stm = con.createStatement();
+			rset = stm.executeQuery("select * from aktivnost");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			try {
+				stm.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
+		closeConnection(con);
+		return rset;
+	}
+		
 }

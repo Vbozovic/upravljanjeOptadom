@@ -1,4 +1,4 @@
-package org.theplu.controllers;
+package controllers;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
