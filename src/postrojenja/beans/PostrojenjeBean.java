@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import postrojenja.entities.Postrojenje;
+import postrojenja.entities.RezultatStatistike;
 import postrojenja.entities.ZbirniElement;
 import postrojenja.incomingEntities.TypeSearch;
 import utils.ConnectionUtils;
@@ -138,9 +139,42 @@ public class PostrojenjeBean {
 	}
 	
 	//Svo djubre u opstini nekoj ili u gradu
-	public List<ZbirniElement> inventarZaPostrojenjaColumnEqual(String column,String equal){
+	public List<RezultatStatistike> inventarZaPostrojenjaColumnEqual(String column,String equal){
 		
-		return null;
+		String query = String.format("SELECT inventar_postrojenja.INDEKS_A,inventar_postrojenja.INDEKS_KO,inventar_postrojenja.INDEKS_PNO,inventar_postrojenja.INJDEKS_DPN,pos.ID_POSTROJENJA,pos.%s,SUM(inventar_postrojenja.KOLICINA_OTPADA) FROM inventar_postrojenja join postrojenje_za_upravljanje_otpadom as pos on pos.ID_POSTROJENJA = inventar_postrojenja.ID_POSTROJENJA where pos.%s = '%s' GROUP BY inventar_postrojenja.INDEKS_A,inventar_postrojenja.INDEKS_KO,inventar_postrojenja.INDEKS_PNO,inventar_postrojenja.INJDEKS_DPN,pos.%s",column,column,equal,column);
+		System.out.println(query);
+		List<RezultatStatistike> toReturn = new LinkedList<>();
+		try {
+			iterAndAdd(query, toReturn, (ResultSet incoming)->{
+				RezultatStatistike rez = new RezultatStatistike();
+				try {
+					rez.setAktivnost(incoming.getString("INDEKS_A"));
+					rez.setIndeks_ko(incoming.getString("INDEKS_KO"));
+					rez.setProcesNastajanja(incoming.getString("INDEKS_PNO"));
+					rez.setDeoProcesa(incoming.getString("INJDEKS_DPN"));
+					rez.setIdPostrojenja(incoming.getInt("ID_POSTROJENJA"));
+					
+					if(column.equals("NAZIV_GRADA")){
+						rez.setNazivOblasti(incoming.getString("NAZIV_GRADA"));
+					}else{
+						rez.setNazivOblasti(incoming.getString("NAZIV_OPSTINE"));
+					}
+					
+					rez.setSuma(incoming.getLong(7));
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return rez;
+			});
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return toReturn;
 	}
 	
 	public List<Postrojenje> getPostrojenjaJoinOnColumnEquals(String joinWith,String column,String equals){

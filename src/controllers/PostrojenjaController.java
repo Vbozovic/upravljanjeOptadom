@@ -16,6 +16,7 @@ import postrojenja.beans.PostrojenjeBean;
 import postrojenja.incomingEntities.LokacijaSearch;
 import postrojenja.incomingEntities.TypeSearch;
 import postrojenja.entities.Postrojenje;
+import postrojenja.entities.RezultatStatistike;
 import postrojenja.entities.ZbirniElement;
 
 @Stateless
@@ -71,7 +72,7 @@ public class PostrojenjaController {
 	@GET
 	@Path("/inventarG/{grad}")
 	@Produces("text/json")
-	public List<ZbirniElement> getOtpadGrad(@PathParam("grad") String grad){
+	public List<RezultatStatistike> getOtpadGrad(@PathParam("grad") String grad){
 		return logic.inventarZaPostrojenjaColumnEqual("NAZIV_GRADA", grad);
 	}
 	
@@ -79,7 +80,7 @@ public class PostrojenjaController {
 	@GET
 	@Path("/inventarO/{opstina}")
 	@Produces("text/json")
-	public List<ZbirniElement> getOtpadOpstina(@PathParam("opstina") String opstina){
+	public List<RezultatStatistike> getOtpadOpstina(@PathParam("opstina") String opstina){
 		return logic.inventarZaPostrojenjaColumnEqual("NAZIV_OPSTINE", opstina);
 	}
 	
