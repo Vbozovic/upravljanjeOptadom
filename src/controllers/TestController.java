@@ -8,8 +8,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
-import beans.TestBean;
-import entities.TestEntity;
+import klasifikacija.beans.TestBean;
+import klasifikacija.entities.TestEntity;
 
 @Stateless
 @LocalBean

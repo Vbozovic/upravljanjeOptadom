@@ -1,4 +1,4 @@
-package incomingEntities;
+package klasifikacija.incomingEntities;
 
 public class KarakterCheckRequest {
 

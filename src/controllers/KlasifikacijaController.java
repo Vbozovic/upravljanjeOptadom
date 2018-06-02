@@ -11,11 +11,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import beans.KlasifikacijaBean;
-import entities.Aktivnost;
-import entities.Proces;
-import entities.ZbirniElement;
-import incomingEntities.KarakterCheckRequest;
+import klasifikacija.beans.KlasifikacijaBean;
+import klasifikacija.entities.Aktivnost;
+import klasifikacija.entities.Proces;
+import klasifikacija.entities.ZbirniElement;
+import klasifikacija.incomingEntities.KarakterCheckRequest;
 
 @Stateless
 @LocalBean

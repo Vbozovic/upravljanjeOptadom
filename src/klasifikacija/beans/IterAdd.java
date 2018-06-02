@@ -1,4 +1,4 @@
-package beans;
+package klasifikacija.beans;
 
 import java.sql.ResultSet;
 import java.util.List;

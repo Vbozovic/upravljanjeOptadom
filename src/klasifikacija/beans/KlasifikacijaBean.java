@@ -1,4 +1,4 @@
-package beans;
+package klasifikacija.beans;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,11 +9,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-
-import entities.Aktivnost;
-import entities.Proces;
-import entities.ZbirniElement;
-import incomingEntities.KarakterCheckRequest;
+import klasifikacija.entities.Aktivnost;
+import klasifikacija.entities.Proces;
+import klasifikacija.entities.ZbirniElement;
+import klasifikacija.incomingEntities.KarakterCheckRequest;
 import utils.ConnectionUtils;
 
 public class KlasifikacijaBean {

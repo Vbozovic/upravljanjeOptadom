@@ -1,4 +1,4 @@
-package entities;
+package klasifikacija.entities;
 
 public class Aktivnost {
 

@@ -1,4 +1,4 @@
-package beans;
+package klasifikacija.beans;
 
 public class TestBean {
 
