@@ -1,13 +1,13 @@
 package beans;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
+import entities.Izdavac;
 import entities.PodnosiocZahteva;
 import entities.ZahtevZaDozvolu;
 import utils.ConnectionUtils;
@@ -23,6 +23,64 @@ public class ZahtevBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public List<Izdavac> getIzdavaci() {
+		
+		Connection c = ConnectionUtils.getConnection();
+		Statement statement = null;
+		List<Izdavac> izdavaci = new LinkedList<>();
+		ResultSet rset=null;
+		
+		try {
+			
+			statement = c.createStatement();
+			rset = statement.executeQuery("SELECT * FROM izdavac");
+			
+			iterAdd(rset, izdavaci, (ResultSet reset,List<Izdavac> toAdd)->{
+				Izdavac izdavac = new Izdavac();
+				try {
+					izdavac.setIdIzdavaca(reset.getInt("ID_IZDAVACA"));
+					izdavac.setNazivIzdavaca(reset.getString("NAZIV_IZDAVACA"));
+
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				izdavaci.add(izdavac);
+			});
+				
+			statement.close();
+			
+		} catch (SQLException e) {
+			
+			System.out.println("Doslo je do greske, gtfo m8");
+			
+		} finally {
+			
+			try {
+				rset.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		try {
+			c.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return izdavaci;		
+		
 	}
 	
 	public List<ZahtevZaDozvolu> getZahtevi() {

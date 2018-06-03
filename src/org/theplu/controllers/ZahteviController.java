@@ -4,15 +4,14 @@ import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import beans.ZahtevBean;
+import entities.Izdavac;
 import entities.PodnosiocZahteva;
 import entities.ZahtevZaDozvolu;
 
@@ -58,5 +57,12 @@ public class ZahteviController {
     @Produces(MediaType.APPLICATION_JSON) 
     public List<ZahtevZaDozvolu> getZahteviPodnosioc(@PathParam("nazivPodnosioca") String nazivPodnosioca) {
     	return zahtevBean.getZahteviPodnosioc(nazivPodnosioca);
+    }
+    
+    @GET
+    @Path("/izdavaci")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Izdavac> getIzdavac() {
+    	return zahtevBean.getIzdavaci();
     }
 }
