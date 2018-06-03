@@ -153,7 +153,8 @@ public class ZahtevBean {
 		ResultSet rset=null;
 		List<ZahtevZaDozvolu> zahteviPodnosioca = new LinkedList<>();
 		
-		String kveri = "SELECT * FROM zahtev_za_dozvolu WHERE `NAZIV_PODNOSIOCA3` =" + nazivPodnosioca;
+		//String kveri = "SELECT * FROM zahtev_za_dozvolu WHERE NAZIV_PODNOSIOCA = " + nazivPodnosioca;
+		String kveri = "SELECT * FROM zahtev_za_dozvolu";
 		
 		try {
 			
@@ -163,17 +164,21 @@ public class ZahtevBean {
 			iterAdd(rset, zahteviPodnosioca, (ResultSet reset,List<ZahtevZaDozvolu> toAdd)->{
 				ZahtevZaDozvolu zahtev = new ZahtevZaDozvolu();
 				try {
-					zahtev.setIdPostrojenja(reset.getInt("BROJ_ZAHTEVA"));
-					zahtev.setNazivPodnosioca(reset.getString("NAZIV_PODNOSIOCA3"));
-					zahtev.setIdPostrojenja(reset.getInt("ID_POSTROJENJA"));
-					zahtev.setKodDozvole(reset.getString("KOD_DOZVOLE"));
-					zahtev.setOdobren(reset.getInt("ODOBREN"));
+					if(reset.getString("NAZIV_PODNOSIOCA3").equals(nazivPodnosioca)) {
+						
+						zahtev.setBrojZahteva(reset.getInt("BROJ_ZAHTEVA"));
+						zahtev.setNazivPodnosioca(reset.getString("NAZIV_PODNOSIOCA3"));
+						zahtev.setIdPostrojenja(reset.getInt("ID_POSTROJENJA"));
+						zahtev.setKodDozvole(reset.getString("KOD_DOZVOLE"));
+						zahtev.setOdobren(reset.getInt("ODOBREN"));						
+
+						zahteviPodnosioca.add(zahtev);
+					}
 					
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				zahteviPodnosioca.add(zahtev);
 			});
 				
 			statement.close();
@@ -208,6 +213,7 @@ public class ZahtevBean {
 		
 	}
 	
+	/*
 	public ZahtevZaDozvolu dodajZahtev(ZahtevZaDozvolu zahtev) {
 		
 		String nazivPodnosioca = zahtev.getNazivPodnosioca();
@@ -278,5 +284,6 @@ public class ZahtevBean {
 
 		return zahtev;
 	}
+	*/
 
 }

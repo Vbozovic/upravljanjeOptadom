@@ -29,13 +29,16 @@ public class ZahteviController {
 		
 	}
 	
-    @POST
+	/*
+	@POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
 	public ZahtevZaDozvolu dodajZahtev(ZahtevZaDozvolu zahtev){    	
     	return zahtevBean.dodajZahtev(zahtev);
 	}
-    
+    */
+	
+	
     @GET
     @Path("/sviZahtevi")
     @Produces(MediaType.APPLICATION_JSON)
@@ -51,7 +54,7 @@ public class ZahteviController {
 	}
         
     @GET
-    @Path("/{nazivPodnosioca}")
+    @Path("/sviZahtevi/{nazivPodnosioca}")
     @Produces(MediaType.APPLICATION_JSON) 
     public List<ZahtevZaDozvolu> getZahteviPodnosioc(@PathParam("nazivPodnosioca") String nazivPodnosioca) {
     	return zahtevBean.getZahteviPodnosioc(nazivPodnosioca);
