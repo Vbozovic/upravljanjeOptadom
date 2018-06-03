@@ -11,8 +11,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import beans.ZahtevBean;
+import entities.Dozvola;
 import entities.Izdavac;
 import entities.PodnosiocZahteva;
+import entities.Postrojenja;
 import entities.ZahtevZaDozvolu;
 
 @Stateless
@@ -55,8 +57,15 @@ public class ZahteviController {
     @GET
     @Path("/sviZahtevi/{nazivPodnosioca}")
     @Produces(MediaType.APPLICATION_JSON) 
-    public List<ZahtevZaDozvolu> getZahteviPodnosioc(@PathParam("nazivPodnosioca") String nazivPodnosioca) {
-    	return zahtevBean.getZahteviPodnosioc(nazivPodnosioca);
+    public List<ZahtevZaDozvolu> getZahteviPodnosioca(@PathParam("nazivPodnosioca") String nazivPodnosioca) {
+    	return zahtevBean.getZahteviPodnosioca(nazivPodnosioca);
+    }
+    
+    @GET
+    @Path("/sviZahteviPostrojenja/{idPostrojenja}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Postrojenja> getZahteviPostrojenja(@PathParam("idPostrojenja") int idPostrojenja) {
+    	return zahtevBean.getZahteviPostrojenja(idPostrojenja);
     }
     
     @GET
@@ -64,5 +73,12 @@ public class ZahteviController {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Izdavac> getIzdavac() {
     	return zahtevBean.getIzdavaci();
+    }
+    
+    @GET
+    @Path("/dozvole")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Dozvola> getDozvole() {
+    	return zahtevBean.getDozvole();
     }
 }

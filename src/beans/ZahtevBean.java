@@ -7,8 +7,10 @@ import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
+import entities.Dozvola;
 import entities.Izdavac;
 import entities.PodnosiocZahteva;
+import entities.Postrojenja;
 import entities.ZahtevZaDozvolu;
 import utils.ConnectionUtils;
 
@@ -25,6 +27,65 @@ public class ZahtevBean {
 		}
 	}
 	
+	public List<Dozvola> getDozvole() {
+		
+		Connection c = ConnectionUtils.getConnection();
+		Statement statement = null;
+		List<Dozvola> dozvole = new LinkedList<>();
+		ResultSet rset=null;
+		
+		try {
+			
+			statement = c.createStatement();
+			rset = statement.executeQuery("SELECT * FROM dozvola");
+			
+			iterAdd(rset, dozvole, (ResultSet reset,List<Dozvola> toAdd)->{
+				Dozvola dozvola = new Dozvola();
+				try {
+					dozvola.setBrojDozvole(reset.getInt("BROJ_DOZVOLE"));
+					dozvola.setIdIzdavaca(reset.getInt("ID_IZDAVACA"));
+					dozvola.setKodDozvole(reset.getString("KOD_DOZVOLE"));
+
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				dozvole.add(dozvola);
+			});
+				
+			statement.close();
+			
+		} catch (SQLException e) {
+			
+			System.out.println("Doslo je do greske, gtfo m8");
+			
+		} finally {
+			
+			try {
+				rset.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		try {
+			c.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return dozvole;		
+		
+	}
+
 	public List<Izdavac> getIzdavaci() {
 		
 		Connection c = ConnectionUtils.getConnection();
@@ -204,7 +265,7 @@ public class ZahtevBean {
 		return podnosioci;	
 	}
 	
-	public List<ZahtevZaDozvolu> getZahteviPodnosioc(String nazivPodnosioca){
+	public List<ZahtevZaDozvolu> getZahteviPodnosioca(String nazivPodnosioca){
 		
 		Connection c = ConnectionUtils.getConnection();
 		Statement statement = null;
@@ -268,6 +329,72 @@ public class ZahtevBean {
 		}
 		
 		return zahteviPodnosioca;	
+		
+	}
+	
+	public List<Postrojenja> getZahteviPostrojenja(int idPostrojenja){
+		
+		Connection c = ConnectionUtils.getConnection();
+		Statement statement = null;
+		ResultSet rset=null;
+		List<Postrojenja> postrojenja = new LinkedList<>();
+		
+		String kveri = "SELECT * FROM postrojenje_za_upravljanje_otpadom WHERE ID_POSTROJENJA = " + idPostrojenja;
+		
+		try {
+			
+			statement = c.createStatement();
+			rset = statement.executeQuery(kveri);
+			
+			iterAdd(rset, postrojenja, (ResultSet reset,List<Postrojenja> toAdd)->{
+				Postrojenja postrojenje = new Postrojenja();
+				try {
+					
+
+						postrojenje.setIdPostrojenja(reset.getInt("ID_POSTROJENJA"));
+						postrojenje.setIdTipa2(reset.getInt("ID_TIPA2"));
+						postrojenje.setJmbg(reset.getString("JMBG"));
+						postrojenje.setImeLica(reset.getString("IME_LICA"));
+						postrojenje.setUkupanKapacitet(reset.getInt("UKUPAN_KAPACITET"));						
+
+						postrojenja.add(postrojenje);
+					
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+				
+			statement.close();
+			
+		} catch (SQLException e) {
+			
+			System.out.println("Doslo je do greske, gtfo m8");
+			
+		} finally {
+			
+			try {
+				rset.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		try {
+			c.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return postrojenja;	
 		
 	}
 	
