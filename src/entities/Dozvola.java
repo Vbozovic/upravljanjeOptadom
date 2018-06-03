@@ -10,6 +10,7 @@ public class Dozvola {
 		
 	}	
 	
+	//vuk no homo
 	public Dozvola(int brojDozvole, int idIzdavaca, String kodDozvole) {
 		this.brojDozvole = brojDozvole;
 		this.idIzdavaca = idIzdavaca;
