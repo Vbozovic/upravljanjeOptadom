@@ -17,6 +17,7 @@ public class Dozvola {
 		this.kodDozvole = kodDozvole;
 	}
 
+	//vuk je vrlo no homo
 	public int getBrojDozvole() {
 		return brojDozvole;
 	}
