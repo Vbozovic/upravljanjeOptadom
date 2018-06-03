@@ -19,7 +19,7 @@ public class TestController {
 	private TestBean logic;
 	
 	public TestController(){
-		//
+		
 		logic = new TestBean();
 		
 	}
