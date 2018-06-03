@@ -52,7 +52,8 @@ public class ZahteviController {
         
     @GET
     @Path("/{nazivPodnosioca}")
-    @Produces(MediaType.APPLICATION_JSON) List<ZahtevZaDozvolu> getZahteviPodnosioc(@PathParam("nazivPodnosioca") String nazivPodnosioca) {
-    	return zahtevBean.getZahteviPodnosioc("NAZIV_PODNOSIOCA3",nazivPodnosioca);
+    @Produces(MediaType.APPLICATION_JSON) 
+    public List<ZahtevZaDozvolu> getZahteviPodnosioc(@PathParam("nazivPodnosioca") String nazivPodnosioca) {
+    	return zahtevBean.getZahteviPodnosioc(nazivPodnosioca);
     }
 }

@@ -146,14 +146,14 @@ public class ZahtevBean {
 		return podnosioci;	
 	}
 	
-	public List<ZahtevZaDozvolu> getZahteviPodnosioc(String kolona, String nazivPodnosioca){
+	public List<ZahtevZaDozvolu> getZahteviPodnosioc(String nazivPodnosioca){
 		
 		Connection c = ConnectionUtils.getConnection();
 		Statement statement = null;
 		ResultSet rset=null;
 		List<ZahtevZaDozvolu> zahteviPodnosioca = new LinkedList<>();
 		
-		String kveri = String.format("SELECT * FROM zahtev_za_dozvolu WHERE %s = %s", kolona, nazivPodnosioca);
+		String kveri = "SELECT * FROM zahtev_za_dozvolu WHERE `NAZIV_PODNOSIOCA3` =" + nazivPodnosioca;
 		
 		try {
 			
