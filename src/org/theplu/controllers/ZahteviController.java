@@ -74,6 +74,14 @@ public class ZahteviController {
     public int getBrojZahtevaZaPodnosioca(@PathParam("nazivPodnosioca") String nazivPodnosioca) {
     	return zahtevBean.getBrojZahtevaZaPodnosioca(nazivPodnosioca);
     }
+        
+    
+    @GET
+    @Path("/dozvolePoKodu/{kodDozvole}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<ZahtevZaDozvolu> getDozvolePoKodu(@PathParam("kodDozvole") String kodDozvole) {
+    	return zahtevBean.getDozvolePoKodu(kodDozvole);
+    }
     
     @GET
     @Path("/izdavaci")

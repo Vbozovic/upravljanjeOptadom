@@ -406,7 +406,8 @@ public class ZahtevBean {
 		List<ZahtevZaDozvolu> zahteviPodnosioca = new LinkedList<>();
 		
 		//String kveri = "SELECT * FROM zahtev_za_dozvolu WHERE NAZIV_PODNOSIOCA = " + nazivPodnosioca;
-		String kveri = "SELECT * FROM zahtev_za_dozvolu";
+		//String kveri = "SELECT * FROM zahtev_za_dozvolu";
+		String kveri = String.format("SELECT * FROM zahtev_za_dozvolu WHERE zahtev_za_dozvolu.NAZIV_PODNOSIOCA3 = '%s'", nazivPodnosioca);
 		
 		try {
 			
@@ -418,15 +419,13 @@ public class ZahtevBean {
 				ZahtevZaDozvolu zahtev = new ZahtevZaDozvolu();
 				
 				try {
-					if(reset.getString("NAZIV_PODNOSIOCA3").equals(nazivPodnosioca)) {
-						
-						zahtev.setBrojZahteva(reset.getInt("BROJ_ZAHTEVA"));
-						zahtev.setNazivPodnosioca(reset.getString("NAZIV_PODNOSIOCA3"));
-						zahtev.setIdPostrojenja(reset.getInt("ID_POSTROJENJA"));
-						zahtev.setKodDozvole(reset.getString("KOD_DOZVOLE"));
-						zahtev.setOdobren(reset.getInt("ODOBREN"));
-						zahteviPodnosioca.add(zahtev);
-					}
+					
+					zahtev.setBrojZahteva(reset.getInt("BROJ_ZAHTEVA"));
+					zahtev.setNazivPodnosioca(reset.getString("NAZIV_PODNOSIOCA3"));
+					zahtev.setIdPostrojenja(reset.getInt("ID_POSTROJENJA"));
+					zahtev.setKodDozvole(reset.getString("KOD_DOZVOLE"));
+					zahtev.setOdobren(reset.getInt("ODOBREN"));
+					zahteviPodnosioca.add(zahtev);					
 					
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -463,6 +462,71 @@ public class ZahtevBean {
 		}
 		
 		return zahteviPodnosioca.size();
+		
+	}
+	
+		
+	public List<ZahtevZaDozvolu> getDozvolePoKodu(String kodDozvole) {
+		
+		Connection c = ConnectionUtils.getConnection();
+		Statement statement = null;
+		ResultSet rset=null;
+		List<ZahtevZaDozvolu> zahteviKoda = new LinkedList<>();
+		
+		//String kveri = "SELECT * FROM zahtev_za_dozvolu WHERE NAZIV_PODNOSIOCA = " + nazivPodnosioca;
+		String kveri = String.format("SELECT * FROM zahtev_za_dozvolu WHERE zahtev_za_dozvolu.KOD_DOZVOLE = '%s'", kodDozvole);
+		
+		try {
+			
+			statement = c.createStatement();
+			rset = statement.executeQuery(kveri);
+			
+			iterAdd(rset, zahteviKoda, (ResultSet reset,List<ZahtevZaDozvolu> toAdd)->{
+				ZahtevZaDozvolu zahtev = new ZahtevZaDozvolu();
+				try {
+					zahtev.setIdPostrojenja(reset.getInt("BROJ_ZAHTEVA"));
+					zahtev.setNazivPodnosioca(reset.getString("NAZIV_PODNOSIOCA3"));
+					zahtev.setIdPostrojenja(reset.getInt("ID_POSTROJENJA"));
+					zahtev.setKodDozvole(reset.getString("KOD_DOZVOLE"));
+					zahtev.setOdobren(reset.getInt("ODOBREN"));
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				zahteviKoda.add(zahtev);
+			});
+				
+			statement.close();
+			
+		} catch (SQLException e) {
+			
+			System.out.println("Doslo je do greske, gtfo m8");
+			
+		} finally {
+			
+			try {
+				rset.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		try {
+			c.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return zahteviKoda;
 		
 	}
 	
