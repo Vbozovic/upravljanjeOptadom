@@ -16,6 +16,7 @@ import klasifikacija.entities.Aktivnost;
 import klasifikacija.entities.Proces;
 import klasifikacija.entities.ZbirniElement;
 import klasifikacija.incomingEntities.KarakterCheckRequest;
+import klasifikacija.incomingEntities.OpisCheck;
 
 @Stateless
 @LocalBean
@@ -104,4 +105,14 @@ public class KlasifikacijaController {
 	public List<ZbirniElement> otpadIzDelaProcesaNastajanja(String deoProcesa){
 		return logic.otpadSaKarakterom(deoProcesa,"INJDEKS_DPN");
 	}
+	
+	//Otpad sa opisom
+	@POST
+	@Path("/otpadPoOpisu")
+	@Consumes(MediaType.TEXT_PLAIN)
+	@Produces("text/json")
+	public ZbirniElement otpadPoImenu(OpisCheck req){
+		return logic.getPoOpisu(req.getOpis());
+	}
+	
 }

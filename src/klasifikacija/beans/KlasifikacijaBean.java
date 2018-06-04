@@ -329,5 +329,34 @@ public class KlasifikacijaBean {
 		
 		return toReturn;
 	}
+
+	
+	public ZbirniElement getPoOpisu(String opis){
+		
+		ResultSet rset;
+		Connection con = ConnectionUtils.getConnection();
+		Statement stat = null;
+		
+		try {
+			stat = con.createStatement();
+			rset = stat.executeQuery(String.format("select * from zbirni_katalog where zbirni_katalog.OPIS = '%s'", opis));
+			rset.next();
+			ZbirniElement ze = new ZbirniElement();
+			ze.setIndeksAktivnosti(rset.getString("INDEKS_A"));
+			ze.setIndeksProcesa(rset.getString("INDEKS_PNO"));
+			ze.setIndeksDelaProcesa(rset.getString("INJDEKS_DPN"));
+			ze.setOpis(opis);
+			ze.setKarakter(rset.getString("KARAKTER"));
+			con.close();
+			rset.close();
+			stat.close();
+			return ze;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
 	
 }
