@@ -96,4 +96,20 @@ public class ZahteviController {
     public List<Dozvola> getDozvole() {
     	return zahtevBean.getDozvole();
     }
+    
+    @GET
+    @Path("/postrojenja")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Postrojenja> getPostrojenja() {
+    	return zahtevBean.getPostrojenja();
+    }
+    
+    /*
+    @GET
+    @Path("/postrojenja/kapacitet/{idPostrojenja}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public int getKapacitetPostrojenja(@PathParam("idPostrojenja") int idPostrojenja) {
+    	return zahtevBean.getKapacitetPostrojenja(idPostrojenja);
+    }
+	*/
 }

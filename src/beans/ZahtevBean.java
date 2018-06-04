@@ -85,6 +85,67 @@ public class ZahtevBean {
 		return dozvole;		
 		
 	}
+	
+	public List<Postrojenja> getPostrojenja() {
+		
+		Connection c = ConnectionUtils.getConnection();
+		Statement statement = null;
+		List<Postrojenja> postrojenja = new LinkedList<>();
+		ResultSet rset=null;
+		
+		try {
+			
+			statement = c.createStatement();
+			rset = statement.executeQuery("SELECT * FROM postrojenje_za_upravljanje_otpadom");
+			
+			iterAdd(rset, postrojenja, (ResultSet reset,List<Postrojenja> toAdd)->{
+				Postrojenja postrojenje = new Postrojenja();
+				try {
+					postrojenje.setIdPostrojenja(reset.getInt("ID_POSTROJENJA"));
+					postrojenje.setIdTipa2(reset.getInt("ID_TIPA2"));
+					postrojenje.setJmbg(reset.getString("JMBG"));
+					postrojenje.setImeLica(reset.getString("IME_LICA"));
+					postrojenje.setUkupanKapacitet(reset.getInt("UKUPAN_KAPACITET"));
+
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				postrojenja.add(postrojenje);
+			});
+				
+			statement.close();
+			
+		} catch (SQLException e) {
+			
+			System.out.println("Doslo je do greske, gtfo m8");
+			
+		} finally {
+			
+			try {
+				rset.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				statement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		try {
+			c.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return postrojenja;		
+		
+	}
 
 	public List<Izdavac> getIzdavaci() {
 		
@@ -529,6 +590,9 @@ public class ZahtevBean {
 		return zahteviKoda;
 		
 	}
+	
+	
+	
 	
 	/*
 	public ZahtevZaDozvolu dodajZahtev(ZahtevZaDozvolu zahtev) {
