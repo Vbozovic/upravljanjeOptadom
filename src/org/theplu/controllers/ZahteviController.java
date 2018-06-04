@@ -69,6 +69,13 @@ public class ZahteviController {
     }
     
     @GET
+    @Path("/brojZahteva/{nazivPodnosioca}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public int getBrojZahtevaZaPodnosioca(@PathParam("nazivPodnosioca") String nazivPodnosioca) {
+    	return zahtevBean.getBrojZahtevaZaPodnosioca(nazivPodnosioca);
+    }
+    
+    @GET
     @Path("/izdavaci")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Izdavac> getIzdavac() {

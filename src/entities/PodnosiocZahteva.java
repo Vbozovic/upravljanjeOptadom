@@ -9,6 +9,7 @@ public class PodnosiocZahteva {
 	private String brojTelefona;
 	private String brojFaksa;
 	private String emailOdgovornogLica;	
+	private int brojZahteva;
 	
 	public PodnosiocZahteva() {
 		
@@ -16,7 +17,7 @@ public class PodnosiocZahteva {
 	
 	
 	public PodnosiocZahteva(String nazivPodnosioca, String imeOdgovornogLica, String prezimeOdgovornogLica,
-			String adresaLica, String brojTelefona, String brojFaksa, String emailOdgovornogLica) {
+			String adresaLica, String brojTelefona, String brojFaksa, String emailOdgovornogLica, int brojZahteva) {
 		
 		this.nazivPodnosioca = nazivPodnosioca;
 		this.imeOdgovornogLica = imeOdgovornogLica;
@@ -25,9 +26,17 @@ public class PodnosiocZahteva {
 		this.brojTelefona = brojTelefona;
 		this.brojFaksa = brojFaksa;
 		this.emailOdgovornogLica = emailOdgovornogLica;
+		this.brojZahteva = brojZahteva;
 		
 	}
 	
+	public int getBrojZahteva() {
+		return brojZahteva;
+	}
+	
+	public void setBrojZahteva(int brojZahteva) {
+		this.brojZahteva = brojZahteva;
+	}
 	
 	public String getNazivPodnosioca() {
 		return nazivPodnosioca;
