@@ -7,6 +7,9 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 import controllers.PostrojenjaController;
+import controllers.KlasifikacijaController;
+import org.theplu.controllers.TestController;
+import controllers.TestController;
 
 @ApplicationPath("/rest")
 public class MyRestApp extends Application {
@@ -14,6 +17,7 @@ public class MyRestApp extends Application {
     public Set<Class<?>> getClasses() {
         Set<Class<?>> classes = new HashSet<Class<?>>();
         classes.add(PostrojenjaController.class);
+        classes.add(KlasifikacijaController.class);
         return classes;
     }
 }
