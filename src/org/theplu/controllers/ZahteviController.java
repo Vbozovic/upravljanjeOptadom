@@ -29,16 +29,7 @@ public class ZahteviController {
 		zahtevBean = new ZahtevBean();
 		
 	}
-	
-	/*
-	@POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-	public ZahtevZaDozvolu dodajZahtev(ZahtevZaDozvolu zahtev){    	
-    	return zahtevBean.dodajZahtev(zahtev);
-	}
-    */
-	
+		
 	
     @GET
     @Path("/sviZahtevi")
@@ -64,8 +55,8 @@ public class ZahteviController {
     @GET
     @Path("/sviZahteviPostrojenja/{idPostrojenja}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Postrojenja> getZahteviPostrojenja(@PathParam("idPostrojenja") int idPostrojenja) {
-    	return zahtevBean.getZahteviPostrojenja(idPostrojenja);
+    public List<ZahtevZaDozvolu> getSviZahteviPostrojenja(@PathParam("idPostrojenja") int idPostrojenja) {
+    	return zahtevBean.getSviZahteviPostrojenja(idPostrojenja);
     }
     
     @GET
@@ -98,18 +89,19 @@ public class ZahteviController {
     }
     
     @GET
-    @Path("/postrojenja")
+    @Path("/postrojenje")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Postrojenja> getPostrojenja() {
     	return zahtevBean.getPostrojenja();
+    }    
+
+    @GET
+    @Path("/postrojenje/{idPostrojenja}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Postrojenja> getPostrojenje(@PathParam("idPostrojenja") int idPostrojenja) {
+    	return zahtevBean.getPostrojenje(idPostrojenja);
     }
     
-    /*
-    @GET
-    @Path("/postrojenja/kapacitet/{idPostrojenja}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public int getKapacitetPostrojenja(@PathParam("idPostrojenja") int idPostrojenja) {
-    	return zahtevBean.getKapacitetPostrojenja(idPostrojenja);
-    }
-	*/
+   
+	
 }
