@@ -42,29 +42,4 @@ public class ConnectionUtils {
 	}
 	
 		
-		Connection con = getConnection();
-		Statement stm = null;
-		ResultSet rset= null;
-		
-		try {
-			stm = con.createStatement();
-			rset = stm.executeQuery("select * from aktivnost");
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally{
-			try {
-				stm.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-		
-		closeConnection(con);
-		return rset;
-	}
-		
 }

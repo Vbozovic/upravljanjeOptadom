@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
+import org.theplu.controllers.ZahteviController;
+
 import controllers.PostrojenjaController;
 import controllers.KlasifikacijaController;
 import controllers.TestController;
