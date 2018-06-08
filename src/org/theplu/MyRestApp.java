@@ -8,7 +8,6 @@ import javax.ws.rs.core.Application;
 
 import controllers.PostrojenjaController;
 import controllers.KlasifikacijaController;
-import org.theplu.controllers.TestController;
 import controllers.TestController;
 
 @ApplicationPath("/rest")
