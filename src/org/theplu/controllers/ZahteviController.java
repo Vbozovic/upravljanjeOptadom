@@ -30,7 +30,7 @@ public class ZahteviController {
 		
 	}
 		
-	
+	//listanje svih zahteva
     @GET
     @Path("/sviZahtevi")
     @Produces(MediaType.APPLICATION_JSON)
@@ -38,6 +38,7 @@ public class ZahteviController {
     	return zahtevBean.getZahtevi();
     }
     
+    //listanje svih podnosioca
     @GET
 	@Path("/podnosioci")
     @Produces(MediaType.APPLICATION_JSON)
@@ -45,6 +46,7 @@ public class ZahteviController {
 		return zahtevBean.getPodnosioci();
 	}
         
+    //svi zahtevi odredjenog podnosioca
     @GET
     @Path("/sviZahtevi/{nazivPodnosioca}")
     @Produces(MediaType.APPLICATION_JSON) 
@@ -52,6 +54,7 @@ public class ZahteviController {
     	return zahtevBean.getZahteviPodnosioca(nazivPodnosioca);
     }
     
+    //svi zahtevi odredjenog postrojenja
     @GET
     @Path("/sviZahteviPostrojenja/{idPostrojenja}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -59,6 +62,7 @@ public class ZahteviController {
     	return zahtevBean.getSviZahteviPostrojenja(idPostrojenja);
     }
     
+    //kolicina zahteva odredjenog podnosioca
     @GET
     @Path("/brojZahteva/{nazivPodnosioca}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -66,7 +70,7 @@ public class ZahteviController {
     	return zahtevBean.getBrojZahtevaZaPodnosioca(nazivPodnosioca);
     }
         
-    
+    //listanje dozvola po kodu
     @GET
     @Path("/dozvolePoKodu/{kodDozvole}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -74,6 +78,7 @@ public class ZahteviController {
     	return zahtevBean.getDozvolePoKodu(kodDozvole);
     }
     
+    //listanje svih izdavaca
     @GET
     @Path("/izdavaci")
     @Produces(MediaType.APPLICATION_JSON)
@@ -81,6 +86,7 @@ public class ZahteviController {
     	return zahtevBean.getIzdavaci();
     }
     
+    //listanje svih dozvola
     @GET
     @Path("/dozvole")
     @Produces(MediaType.APPLICATION_JSON)
@@ -88,6 +94,7 @@ public class ZahteviController {
     	return zahtevBean.getDozvole();
     }
     
+    //listanje svih postrojenja
     @GET
     @Path("/postrojenje")
     @Produces(MediaType.APPLICATION_JSON)
@@ -95,6 +102,7 @@ public class ZahteviController {
     	return zahtevBean.getPostrojenja();
     }    
 
+    //odabir specificnog postrojenja
     @GET
     @Path("/postrojenje/{idPostrojenja}")
     @Produces(MediaType.APPLICATION_JSON)
