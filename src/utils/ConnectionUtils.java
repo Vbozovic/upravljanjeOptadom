@@ -19,7 +19,7 @@ public class ConnectionUtils {
 			e.printStackTrace();
 		}
 		try {
-			return DriverManager.getConnection("jdbc:mysql://localhost/ekologija", "root", "");
+			return DriverManager.getConnection("jdbc:mysql://localhost/si", "root", "");
 		} catch (SQLException e) {
 			// TODO nekim log framework-om ovo bi trebalo da se upisuje u log
 			e.printStackTrace();
@@ -41,7 +41,7 @@ public class ConnectionUtils {
 		}
 	}
 	
-	public static ResultSet getResult(String query){
+		
 		Connection con = getConnection();
 		Statement stm = null;
 		ResultSet rset= null;

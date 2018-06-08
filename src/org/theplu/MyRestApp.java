@@ -15,6 +15,7 @@ public class MyRestApp extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> classes = new HashSet<Class<?>>();
+        classes.add(ZahteviController.class);
         classes.add(PostrojenjaController.class);
         classes.add(KlasifikacijaController.class);
         return classes;
