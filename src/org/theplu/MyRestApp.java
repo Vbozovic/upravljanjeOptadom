@@ -6,14 +6,14 @@ import java.util.Set;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-import org.theplu.controllers.TestController;
+import controllers.PostrojenjaController;
 
 @ApplicationPath("/rest")
 public class MyRestApp extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> classes = new HashSet<Class<?>>();
-        classes.add(TestController.class);
+        classes.add(PostrojenjaController.class);
         return classes;
     }
 }
