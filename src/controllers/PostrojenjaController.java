@@ -1,5 +1,6 @@
 package controllers;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -12,8 +13,12 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import brokerUtils.ReflectUtils;
 import postrojenja.beans.PostrojenjeBean;
+import postrojenja.incomingEntities.Grad;
+import postrojenja.incomingEntities.Inventar;
 import postrojenja.incomingEntities.LokacijaSearch;
+import postrojenja.incomingEntities.Opstina;
 import postrojenja.incomingEntities.TypeSearch;
 import postrojenja.entities.Postrojenje;
 import postrojenja.entities.RezultatStatistike;
@@ -63,25 +68,25 @@ public class PostrojenjaController {
 	}
 	
 	@GET
-	@Path("/inventar/{id}")
+	@Path("/inventar")
 	@Produces("text/json")
-	public List<ZbirniElement> getinvenarSpecific(@PathParam("id") int id){
-		return logic.inventarZaSpecificnoPostrojenje(id);
+	public List<ZbirniElement> getinvenarSpecific(Inventar id){
+		return logic.inventarZaSpecificnoPostrojenje(id.getId());
 	}
 	
 	@GET
-	@Path("/inventarG/{grad}")
+	@Path("/inventarG")
 	@Produces("text/json")
-	public List<RezultatStatistike> getOtpadGrad(@PathParam("grad") String grad){
-		return logic.inventarZaPostrojenjaColumnEqual("NAZIV_GRADA", grad);
+	public List<RezultatStatistike> getOtpadGrad(Grad grad){
+		return logic.inventarZaPostrojenjaColumnEqual("NAZIV_GRADA", grad.getGrad());
 	}
 	
 	
 	@GET
-	@Path("/inventarO/{opstina}")
+	@Path("/inventarO")
 	@Produces("text/json")
-	public List<RezultatStatistike> getOtpadOpstina(@PathParam("opstina") String opstina){
-		return logic.inventarZaPostrojenjaColumnEqual("NAZIV_OPSTINE", opstina);
+	public List<RezultatStatistike> getOtpadOpstina(Opstina opstina){
+		return logic.inventarZaPostrojenjaColumnEqual("NAZIV_OPSTINE", opstina.getOpstina());
 	}
 	
 }

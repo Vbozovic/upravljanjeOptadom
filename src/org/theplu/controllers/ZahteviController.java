@@ -12,7 +12,10 @@ import javax.ws.rs.core.MediaType;
 
 import beans.ZahtevBean;
 import entities.Dozvola;
+import entities.IdPostrojenja;
 import entities.Izdavac;
+import entities.KodDozvole;
+import entities.NazivPodnosioca;
 import entities.PodnosiocZahteva;
 import entities.Postrojenja;
 import entities.ZahtevZaDozvolu;
@@ -48,34 +51,34 @@ public class ZahteviController {
         
     //svi zahtevi odredjenog podnosioca
     @GET
-    @Path("/sviZahtevi/{nazivPodnosioca}")
+    @Path("/sviZahtevi")
     @Produces(MediaType.APPLICATION_JSON) 
-    public List<ZahtevZaDozvolu> getZahteviPodnosioca(@PathParam("nazivPodnosioca") String nazivPodnosioca) {
-    	return zahtevBean.getZahteviPodnosioca(nazivPodnosioca);
+    public List<ZahtevZaDozvolu> getZahteviPodnosioca(NazivPodnosioca nazivPodnosioca) {
+    	return zahtevBean.getZahteviPodnosioca(nazivPodnosioca.getNazivPodnosioca());
     }
     
     //svi zahtevi odredjenog postrojenja
     @GET
-    @Path("/sviZahteviPostrojenja/{idPostrojenja}")
+    @Path("/sviZahteviPostrojenja")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ZahtevZaDozvolu> getSviZahteviPostrojenja(@PathParam("idPostrojenja") int idPostrojenja) {
-    	return zahtevBean.getSviZahteviPostrojenja(idPostrojenja);
+    public List<ZahtevZaDozvolu> getSviZahteviPostrojenja(IdPostrojenja idPostrojenja) {
+    	return zahtevBean.getSviZahteviPostrojenja(idPostrojenja.getId());
     }
     
     //kolicina zahteva odredjenog podnosioca
     @GET
-    @Path("/brojZahteva/{nazivPodnosioca}")
+    @Path("/brojZahteva")
     @Produces(MediaType.APPLICATION_JSON)
-    public int getBrojZahtevaZaPodnosioca(@PathParam("nazivPodnosioca") String nazivPodnosioca) {
-    	return zahtevBean.getBrojZahtevaZaPodnosioca(nazivPodnosioca);
+    public int getBrojZahtevaZaPodnosioca(NazivPodnosioca nazivPodnosioca) {
+    	return zahtevBean.getBrojZahtevaZaPodnosioca(nazivPodnosioca.getNazivPodnosioca());
     }
         
     //listanje dozvola po kodu
     @GET
-    @Path("/dozvolePoKodu/{kodDozvole}")
+    @Path("/dozvolePoKodu")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ZahtevZaDozvolu> getDozvolePoKodu(@PathParam("kodDozvole") String kodDozvole) {
-    	return zahtevBean.getDozvolePoKodu(kodDozvole);
+    public List<ZahtevZaDozvolu> getDozvolePoKodu(KodDozvole kodDozvole) {
+    	return zahtevBean.getDozvolePoKodu(kodDozvole.getKod());
     }
     
     //listanje svih izdavaca
@@ -104,10 +107,10 @@ public class ZahteviController {
 
     //odabir specificnog postrojenja
     @GET
-    @Path("/postrojenje/{idPostrojenja}")
+    @Path("/postrojenje")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Postrojenja> getPostrojenje(@PathParam("idPostrojenja") int idPostrojenja) {
-    	return zahtevBean.getPostrojenje(idPostrojenja);
+    public List<Postrojenja> getPostrojenje(IdPostrojenja idPostrojenja) {
+    	return zahtevBean.getPostrojenje(idPostrojenja.getId());
     }
     
    
