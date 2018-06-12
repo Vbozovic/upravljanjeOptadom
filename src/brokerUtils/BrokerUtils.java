@@ -107,7 +107,7 @@ public class BrokerUtils {
 			brokerUtils.Service service = new brokerUtils.Service();
 			//moramo da oduzmemo /rest deo
 			service.setName("ekologija "+getID());
-			service.setRoute(str.substring(5, str.length()));
+			service.setRoute(str);
 			service.setMethod(ReflectUtils.getMethod(str.substring(5+1, str.length())));
 			serReq.getServices().add(service);
 			ffs.add(service);
