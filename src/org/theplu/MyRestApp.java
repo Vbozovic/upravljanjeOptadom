@@ -20,6 +20,7 @@ public class MyRestApp extends Application {
         classes.add(ZahteviController.class);
         classes.add(PostrojenjaController.class);
         classes.add(KlasifikacijaController.class);
+        classes.add(TestController.class);
         return classes;
     }
 }
